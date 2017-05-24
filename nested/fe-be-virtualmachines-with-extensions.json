@@ -8,17 +8,8 @@
         "networkSettings": {
             "type": "object"
         },
-        "dbPassword": {
-            "type": "string"
-        },
-        "replicationPassword": {
-            "type": "string"
-        },
-        "clusterToken": {
-            "type": "string"
-        },
-        "clusterName": {
-            "type": "string"
+        "keyvaultSettings": {
+            "type": "object"
         }
     },
     "variables": {},
@@ -35,7 +26,17 @@
                 "osProfile": {
                     "computerName": "[parameters('computeSettings').leaderComputerName]",
                     "adminUsername": "[parameters('computeSettings').adminUsername]",
-                    "adminPassword": "[parameters('computeSettings').adminPassword]",
+                    "linuxConfiguration": {
+                        "disablePasswordAuthentication": true,
+                        "ssh": {
+                            "publicKeys": [
+                                {
+                                    "keyData": "[parameters('computeSettings').sshKeyData]",
+                                    "path": "[parameters('computeSettings').sshKeyPath]"
+                                }
+                            ]
+                        }
+                    },
                     "customData": "[parameters('computeSettings').leaderCustomData]"
                 },
                 "storageProfile": {
@@ -92,7 +93,7 @@
                         "typeHandlerVersion": "2.0",
                         "autoUpgradeMinorVersion": true,
                         "settings": {
-                            "commandToExecute": "[concat('bash /etc/chef-backend/chef-backend-install.sh', ' ', parameters('dbPassword'), ' ', parameters('replicationPassword'), ' ', parameters('clusterToken'), ' ', parameters('clusterName'))]"
+                            "commandToExecute": "[concat('bash /etc/chef-backend/chef-backend-install.sh', ' ', parameters('keyvaultSettings').dbPasswordValue, ' ', parameters('keyvaultSettings').replicationPasswordValue, ' ', parameters('keyvaultSettings').clusterTokenValue, ' ', parameters('keyvaultSettings').clusterNameValue)]"
                         }
                     }
                 }
@@ -110,7 +111,17 @@
                 "osProfile": {
                     "computerName": "[parameters('computeSettings').followerComputerName1]",
                     "adminUsername": "[parameters('computeSettings').adminUsername]",
-                    "adminPassword": "[parameters('computeSettings').adminPassword]",
+                    "linuxConfiguration": {
+                        "disablePasswordAuthentication": true,
+                        "ssh": {
+                            "publicKeys": [
+                                {
+                                    "keyData": "[parameters('computeSettings').sshKeyData]",
+                                    "path": "[parameters('computeSettings').sshKeyPath]"
+                                }
+                            ]
+                        }
+                    },
                     "customData": "[parameters('computeSettings').followerCustomData]"
                 },
                 "storageProfile": {
@@ -168,7 +179,7 @@
                         "typeHandlerVersion": "2.0",
                         "autoUpgradeMinorVersion": true,
                         "settings": {
-                            "commandToExecute": "[concat('bash /etc/chef-backend/chef-backend-install.sh', ' ', parameters('dbPassword'), ' ', parameters('replicationPassword'), ' ', parameters('clusterToken'), ' ', parameters('clusterName'))]"
+                            "commandToExecute": "[concat('bash /etc/chef-backend/chef-backend-install.sh', ' ', parameters('keyvaultSettings').dbPasswordValue, ' ', parameters('keyvaultSettings').replicationPasswordValue, ' ', parameters('keyvaultSettings').clusterTokenValue, ' ', parameters('keyvaultSettings').clusterNameValue)]"
                         }
                     }
                 }
@@ -186,7 +197,17 @@
                 "osProfile": {
                     "computerName": "[parameters('computeSettings').followerComputerName2]",
                     "adminUsername": "[parameters('computeSettings').adminUsername]",
-                    "adminPassword": "[parameters('computeSettings').adminPassword]",
+                    "linuxConfiguration": {
+                        "disablePasswordAuthentication": true,
+                        "ssh": {
+                            "publicKeys": [
+                                {
+                                    "keyData": "[parameters('computeSettings').sshKeyData]",
+                                    "path": "[parameters('computeSettings').sshKeyPath]"
+                                }
+                            ]
+                        }
+                    },
                     "customData": "[parameters('computeSettings').followerCustomData]"
                 },
                 "storageProfile": {
@@ -244,7 +265,7 @@
                         "typeHandlerVersion": "2.0",
                         "autoUpgradeMinorVersion": true,
                         "settings": {
-                            "commandToExecute": "[concat('bash /etc/chef-backend/chef-backend-install.sh', ' ', parameters('dbPassword'), ' ', parameters('replicationPassword'), ' ', parameters('clusterToken'), ' ', parameters('clusterName'))]"
+                            "commandToExecute": "[concat('bash /etc/chef-backend/chef-backend-install.sh', ' ', parameters('keyvaultSettings').dbPasswordValue, ' ', parameters('keyvaultSettings').replicationPasswordValue, ' ', parameters('keyvaultSettings').clusterTokenValue, ' ', parameters('keyvaultSettings').clusterNameValue)]"
                         }
                     }
                 }
@@ -262,7 +283,17 @@
                 "osProfile": {
                     "computerName": "[parameters('computeSettings').feComputerName0]",
                     "adminUsername": "[parameters('computeSettings').adminUsername]",
-                    "adminPassword": "[parameters('computeSettings').adminPassword]",
+                    "linuxConfiguration": {
+                        "disablePasswordAuthentication": true,
+                        "ssh": {
+                            "publicKeys": [
+                                {
+                                    "keyData": "[parameters('computeSettings').sshKeyData]",
+                                    "path": "[parameters('computeSettings').sshKeyPath]"
+                                }
+                            ]
+                        }
+                    },
                     "customData": "[parameters('computeSettings').fe0CustomData]"
                 },
                 "storageProfile": {
@@ -322,7 +353,7 @@
                         "typeHandlerVersion": "2.0",
                         "autoUpgradeMinorVersion": true,
                         "settings": {
-                            "commandToExecute": "[concat('bash /etc/opscode/chef-frontend-install.sh', ' ', parameters('dbPassword'), ' ', parameters('computeSettings').adminPassword, ' ', parameters('computeSettings').firstName, ' ', parameters('computeSettings').lastName, ' ', parameters('computeSettings').emailId, ' ', parameters('computeSettings').organizationName)]"
+                            "commandToExecute": "[concat('bash /etc/opscode/chef-frontend-install.sh', ' ', parameters('keyvaultSettings').dbPasswordValue, ' ', parameters('computeSettings').firstName, ' ', parameters('computeSettings').lastName, ' ', parameters('computeSettings').emailId, ' ', parameters('computeSettings').organizationName, ' ', parameters('keyvaultSettings').appID, ' ', parameters('keyvaultSettings').tenantID, ' ', parameters('keyvaultSettings').password, ' ', parameters('keyvaultSettings').objectId, ' ', parameters('keyvaultSettings').keyVaultName)]"
                         }
                     }
                 }
@@ -340,7 +371,17 @@
                 "osProfile": {
                     "computerName": "[parameters('computeSettings').feComputerName1]",
                     "adminUsername": "[parameters('computeSettings').adminUsername]",
-                    "adminPassword": "[parameters('computeSettings').adminPassword]",
+                    "linuxConfiguration": {
+                        "disablePasswordAuthentication": true,
+                        "ssh": {
+                            "publicKeys": [
+                                {
+                                    "keyData": "[parameters('computeSettings').sshKeyData]",
+                                    "path": "[parameters('computeSettings').sshKeyPath]"
+                                }
+                            ]
+                        }
+                    },
                     "customData": "[parameters('computeSettings').feCustomData]"
                 },
                 "storageProfile": {
@@ -398,7 +439,7 @@
                         "typeHandlerVersion": "2.0",
                         "autoUpgradeMinorVersion": true,
                         "settings": {
-                            "commandToExecute": "[concat('bash /etc/opscode/chef-frontend-install.sh', ' ', parameters('dbPassword'))]"
+                            "commandToExecute": "[concat('bash /etc/opscode/chef-frontend-install.sh', ' ', parameters('keyvaultSettings').dbPasswordValue, ' ', parameters('computeSettings').firstName, ' ', parameters('computeSettings').lastName, ' ', parameters('computeSettings').emailId, ' ', parameters('computeSettings').organizationName, ' ', parameters('keyvaultSettings').appID, ' ', parameters('keyvaultSettings').tenantID, ' ', parameters('keyvaultSettings').password, ' ', parameters('keyvaultSettings').objectId, ' ', parameters('keyvaultSettings').keyVaultName)]"
                         }
                     }
                 }
@@ -416,7 +457,17 @@
                 "osProfile": {
                     "computerName": "[parameters('computeSettings').feComputerName2]",
                     "adminUsername": "[parameters('computeSettings').adminUsername]",
-                    "adminPassword": "[parameters('computeSettings').adminPassword]",
+                    "linuxConfiguration": {
+                        "disablePasswordAuthentication": true,
+                        "ssh": {
+                            "publicKeys": [
+                                {
+                                    "keyData": "[parameters('computeSettings').sshKeyData]",
+                                    "path": "[parameters('computeSettings').sshKeyPath]"
+                                }
+                            ]
+                        }
+                    },
                     "customData": "[parameters('computeSettings').feCustomData]"
                 },
                 "storageProfile": {
@@ -474,7 +525,7 @@
                         "typeHandlerVersion": "2.0",
                         "autoUpgradeMinorVersion": true,
                         "settings": {
-                            "commandToExecute": "[concat('bash /etc/opscode/chef-frontend-install.sh', ' ', parameters('dbPassword'))]"
+                            "commandToExecute": "[concat('bash /etc/opscode/chef-frontend-install.sh', ' ', parameters('keyvaultSettings').dbPasswordValue, ' ', parameters('computeSettings').firstName, ' ', parameters('computeSettings').lastName, ' ', parameters('computeSettings').emailId, ' ', parameters('computeSettings').organizationName, ' ', parameters('keyvaultSettings').appID, ' ', parameters('keyvaultSettings').tenantID, ' ', parameters('keyvaultSettings').password, ' ', parameters('keyvaultSettings').objectId, ' ', parameters('keyvaultSettings').keyVaultName)]"
                         }
                     }
                 }
@@ -492,7 +543,17 @@
                 "osProfile": {
                     "computerName": "[parameters('computeSettings').autoComputerName]",
                     "adminUsername": "[parameters('computeSettings').adminUsername]",
-                    "adminPassword": "[parameters('computeSettings').adminPassword]",
+                    "linuxConfiguration": {
+                        "disablePasswordAuthentication": true,
+                        "ssh": {
+                            "publicKeys": [
+                                {
+                                    "keyData": "[parameters('computeSettings').sshKeyData]",
+                                    "path": "[parameters('computeSettings').sshKeyPath]"
+                                }
+                            ]
+                        }
+                    },
                     "customData": "[parameters('computeSettings').automateCustomData]"
                 },
                 "storageProfile": {
@@ -549,7 +610,7 @@
                         "typeHandlerVersion": "2.0",
                         "autoUpgradeMinorVersion": true,
                         "settings": {
-                            "commandToExecute": "bash /etc/delivery/chef-automate-install.sh"
+                            "commandToExecute": "[concat('bash /etc/delivery/chef-automate-install.sh', ' ', parameters('keyvaultSettings').appID, ' ', parameters('keyvaultSettings').tenantID, ' ', parameters('keyvaultSettings').password, ' ', parameters('keyvaultSettings').objectId, ' ', parameters('keyvaultSettings').keyVaultName)]"
                         }
                     }
                 }
