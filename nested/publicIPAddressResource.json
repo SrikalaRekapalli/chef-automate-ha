@@ -32,5 +32,15 @@
                 }
             }
         }
-    ]
+    ],
+    "outputs": {
+        "chefServerfqdn":{
+            "type": "string",
+            "value": "[reference(resourceId('Microsoft.Network/publicIPAddresses',parameters('networkSettings').felbPublicIPAddressName),'2015-06-15').dnsSettings.fqdn]"
+        },
+        "chefAutomatefqdn":{
+            "type": "string",
+            "value": "[reference(resourceId('Microsoft.Network/publicIPAddresses',parameters('networkSettings').chefAutoPublicIPAddressName),'2015-06-15').dnsSettings.fqdn]"
+        }
+    }
 }
