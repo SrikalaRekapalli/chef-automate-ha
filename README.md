@@ -10,7 +10,7 @@ Chef Automate-HA environment uses key vault to store the secrets like dbpassword
 
 ## Chef-Automate-HA Architecture Diagram
 
-    ![alt text](https://raw.githubusercontent.com/SrikalaRekapalli/chef-automate-ha/master/images/chef-automate-ha-architecture.png)
+![alt text](https://raw.githubusercontent.com/SrikalaRekapalli/chef-automate-ha/master/images/chef-automate-ha-architecture.png)
 
 ## Deploying Chef-Automate-HA using Azure keyvault through Azure Cloud Shell
 
