@@ -10,7 +10,7 @@ Chef Automate-HA environment uses key vault to store the secrets like dbpassword
 
 ## Chef-Automate-HA Architecture Diagram
 
-![alt text](https://raw.githubusercontent.com/SrikalaRekapalli/chef-automate-ha/master/images/chef-automate-ha-architecture.png)
+    ![alt text](https://raw.githubusercontent.com/SrikalaRekapalli/chef-automate-ha/master/images/chef-automate-ha-architecture.png)
 
 ## Deploying Chef-Automate-HA using Azure keyvault through Azure Cloud Shell
 
@@ -24,7 +24,7 @@ First we need to execute the below command before we launch the chef-automate-HA
 
 2.	After executing the above command, you will get **appId, dispalyName, name, password, tenantId**.
 
-![alt text](https://raw.githubusercontent.com/SrikalaRekapalli/chef-automate-ha/master/images/1.png)
+    ![alt text](https://raw.githubusercontent.com/SrikalaRekapalli/chef-automate-ha/master/images/1.png)
 
 3.	Note down the **appId** and **password**, you will need to update these two in chef-automate-ha.parameters.json file.
 
@@ -88,7 +88,7 @@ First we need to execute the below command before we launch the chef-automate-HA
 
     **For example:** /root/automate.license
 
-    **The --server-url** is the URL of your Chef server, which contains the fully-qualified domain name of the Chef server and the name of the organization you created when you created the delivery user.
+    **•The --server-url** is the URL of your Chef server, which contains the fully-qualified domain name of the Chef server and the name of the organization you created when you created the delivery user.
 
     **•	AUTOMATE_SERVER_FQDN** is the external fully-qualified domain name of the Chef Automate server. This is just the name of the system, not a URL.
 
@@ -124,7 +124,7 @@ First we need to execute the below command before we launch the chef-automate-HA
 
     **az keyvault secret show --name chefuserpassword --vault-name < keyvaultname >**
 
-Where keyvault name is displayed in the output section.
+    Where keyvault name is displayed in the output section.
 
     ![alt text](https://raw.githubusercontent.com/SrikalaRekapalli/chef-automate-ha/master/images/11.png)
 
